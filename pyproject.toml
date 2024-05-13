@@ -3,7 +3,7 @@ requires = ["setuptools", "setuptools-scm"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "pyQi"
+name = "pyqi_api"
 version = "1.0.0"
 authors = [
     {name="Christopher Prince", email="c.pj.prince@gmail.com"}
