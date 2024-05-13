@@ -1,0 +1,26 @@
+[build-system]
+requires = ["setuptools", "setuptools-scm"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pyQi"
+version = "1.0.0"
+authors = [
+    {name="Christopher Prince", email="c.pj.prince@gmail.com"}
+    ]
+description = "Python Module for QI Content and Collections Management System by Keepthinking"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: Apache Software License",
+    "Operating System :: OS Independent",
+    "Topic :: System :: Archiving"
+    ]
+
+[project.urls]
+Homepage = "https://github.com/CPJPRINCE/pyqi"
+Issues = "https://github.com/CPJPRINCE/pyqi/issues"
+
+[tool.setuptools.packages.find]
+where = ['.']
+include = ['pyQi']
+exclude = []
