@@ -163,13 +163,16 @@ class QiAPI():
     def import_from_csv(file):
         pass
 
-    def import_from_excel(self,file):
+    def import_from_excel(self, table, file):
         df = pd.read_excel(file)
         xl_records = df.to_dict('records')
-        for n,row in enumerate(xl_records,1):
+        for n, row in enumerate(xl_records, 1):
             table = row.get('table')
-            if table is None: print('Please ensure a \'table\' header is present with the specified table'); time.sleep(5);raise SystemExit()
-            record_json = JsonBuilder(table,row)
+            if table is None:
+                print('Please ensure a \'table\' header is present with the specified table')
+                time.sleep(5)
+                raise SystemExit()
+            record_json = JsonBuilder(table, row)
             if record_json.get('relationships'):
                 if n < 1: #Temp to not repeat lookup...
                     for old_key in record_json.get('relationships'):
