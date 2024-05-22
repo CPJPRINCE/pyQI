@@ -379,4 +379,5 @@ class QiRecords():
 class QiRecord():
     def __init__(self,**kwargs):
         for arg in kwargs.items():
+        for arg in kwargs.items():
             setattr(self,arg[0],arg[1])
