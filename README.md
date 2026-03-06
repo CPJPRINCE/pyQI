@@ -1,6 +1,6 @@
 # pyQi
 
-[![Supported Versions](https://img.shields.io/pypi/pyversions/pyqi.svg)](https://pypi.org/project/pyqi)
+[![Supported Versions](https://img.shields.io/pypi/pyversions/pyqi.svg)](https://pypi.org/project/pyqi_api)
 
 A Python client library for interacting with Qi's Content and Collections Management Software API. Provides both synchronous and asynchronous interfaces for querying, creating, updating, and deleting records with full bulk operation support.
 
