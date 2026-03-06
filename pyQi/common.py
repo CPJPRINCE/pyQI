@@ -6,11 +6,13 @@ author: Christopher Prince
 license: Apache License 2.0
 """
 
-import logging, json, base64
+import logging, json, base64, os
 import requests
 from requests.auth import HTTPBasicAuth
 from requests.exceptions import RequestException, HTTPError, ConnectionError, Timeout
 from getpass import getpass
+import configparser
+
 logger = logging.getLogger(__name__)
 
 try: 
@@ -111,7 +113,10 @@ class QiAuthentication():
         """
         if self.credentials_file:
             logger.info('Using credentials file.')
-            # Add Credentials File Handling Here
+            config = configparser.ConfigParser(interpolation=configparser.Interpolation())
+            config.read(os.path.relpath(self.credentials_file), encoding='utf-8')
+            self.username = config.get('credentials', 'username', fallback=self.username)
+            self.password = config.get('credentials', 'password', fallback=self.password)
             logger.info(f'Successfully logged into Preservica Server {self.server}, as user: {self.username}')
             self.auth = HTTPBasicAuth(self.username, str(self.password))
             return self.auth
