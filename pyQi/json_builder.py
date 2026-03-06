@@ -8,11 +8,12 @@ license: Apache License 2.0"
 class JsonBuilder():
     def __init__(self, data: dict):
         self.data = data
-        self.relationships_dict = {"relationships": None}
+        self.relationships_dict: dict = {"relationships": None}
         self.records_dict = dict()
         self.relationships_list = list()
         self.parse_data_init()
-        if self.relations_set: self.parse_data_relationships()
+        if self.relations_set:
+            self.parse_data_relationships()
         self.parse_data_final()
         
     def parse_data_init(self):
