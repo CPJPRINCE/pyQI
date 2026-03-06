@@ -282,11 +282,11 @@ class QiAPI(QiAuthentication):
 
     def find_record(self, table: str, fields_to_search: str, search_term: str, fields_to_return: str|None = None, print_response: bool = False):
         self.get_request(table = table, fields_to_search = fields_to_search, search_term = search_term, print_response = print_response, fields = fields_to_return)
-        return QiRecord(self.json_data['records'][0])
+        return QiRecord(**self.json_data['records'][0])
     
     def find_record_by_id(self, table: str, id: str|int, fields_to_return: str|None = None, print_response: bool = False):
         self.get_request(table = table, fields_to_search = "id", search_term = str(id), print_response = print_response, fields = fields_to_return)
-        return QiRecord(self.json_data['records'][0])
+        return QiRecord(**self.json_data['records'][0])
 
     def search_to_excel(self, output_file: str, table: str, fields_to_search: str, search_term: str|None = None, print_response: bool = False, **kwargs):
         if pd is None:
