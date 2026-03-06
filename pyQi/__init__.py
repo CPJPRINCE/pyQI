@@ -5,8 +5,9 @@ Author: Christopher Prince
 license: Apache License 2.0"
 """
 
-from .pyQi_api import QiAPI, QiRecord, QiRecords
-from .pyQi_api_async import QiAPI, QiRecord, QiRecords
+from .QiApi import QiAPI
+from .QiApi_async import QiAPIAsync
+from .common import QiRecord, QiRecords, base64_encode, parse_data
 from .json_builder import JsonBuilder
 import importlib.metadata
 
