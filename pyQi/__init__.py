@@ -7,8 +7,9 @@ license: Apache License 2.0"
 
 from .pyQi_api import QiAPI, QiRecord, QiRecords
 from .pyQi_api_async import QiAPI, QiRecord, QiRecords
-from .xltojson import JsonBuilder
+from .json_builder import JsonBuilder
 import importlib.metadata
+
 
 __author__ = "Christopher Prince (c.pj.prince@gmail.com)"
 __license__ = "Apache License Version 2.0"
