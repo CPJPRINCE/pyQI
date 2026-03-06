@@ -27,6 +27,13 @@ dependencies = [
 Homepage = "https://github.com/CPJPRINCE/pyqi"
 Issues = "https://github.com/CPJPRINCE/pyqi/issues"
 
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0",
+    "pytest-asyncio>=0.21",
+    "pytest-cov",
+]
+
 [tool.setuptools.packages.find]
 where = ['.']
 include = ['pyQi']
