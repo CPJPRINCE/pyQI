@@ -5,6 +5,10 @@ author: Christopher Prince
 license: Apache License 2.0"
 """
 
+import logging
+
+logger = logging.getLogger(__name__)
+
 class JsonBuilder():
     def __init__(self, data: dict):
         self.data = data
@@ -27,6 +31,7 @@ class JsonBuilder():
                 self.relations_set.add(record.split(":")[1])
             else: self.record_info_dict.update({record:self.data.get(record)})
         self.relations_set = sorted(self.relations_set)
+        logger.debug(f"Lists: {self.lists_set}")
     
     def parse_data_relationships(self):
         relations_dict = {}        
@@ -48,3 +53,4 @@ class JsonBuilder():
             self.records_dict = self.records_dict
         else:
             self.records_dict = {**self.records_dict, **self.relationships_dict}
+        logger.debug(f"Relationships: {self.relationships_dict}")
