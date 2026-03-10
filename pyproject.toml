@@ -43,3 +43,8 @@ dev = [
 where = ['.']
 include = ['pyQi']
 exclude = []
+
+[tool.pytest.ini_options]
+minversion = "7.0"
+testpaths = ["tests"]
+python_files = ["test_*.py"]
