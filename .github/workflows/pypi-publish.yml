@@ -11,7 +11,9 @@ on:
       - '.github/**'
   pull_request:
     # The branches below must be a subset of the branches above
-    branches: [ master]
+    branches: 
+      - master
+      - dev
     paths-ignore:
       - 'README.md'
       - 'docs/**'
@@ -109,9 +111,10 @@ jobs:
   publish-to-testpypi:
     name: >-
       Publish Python distribution to TestPyPI
-    if: github.ref == 'refs/heads/dev'  # only publish to TestPyPI on dev branch pushes
     needs:
+    - verify-tag-branch-rule
     - build
+    if: needs.verify-tag-branch-rule.outputs.publish_testpypi == 'true'
     runs-on: ubuntu-latest
     environment:
       name: testpypi
@@ -133,9 +136,10 @@ jobs:
   publish-to-pypi:
     name: >-
       Publish Python distribution to PyPI
-    if: startsWith(github.ref, 'refs/tags/')  # only publish to PyPI on tag pushes
     needs:
+    - verify-tag-branch-rule
     - build
+    if: needs.verify-tag-branch-rule.outputs.publish_pypi == 'true'
     runs-on: ubuntu-latest
     environment:
       name: pypi

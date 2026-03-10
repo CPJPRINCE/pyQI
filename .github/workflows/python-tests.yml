@@ -12,12 +12,15 @@ on:
       - 'assets/**'
       - '.github/**'
   pull_request:
-    branches: [ master]
+    branches: 
+      - master
+      - dev
     paths-ignore:
       - 'README.md'
       - 'docs/**'
       - 'assets/**'
       - '.github/**'
+  workflow_dispatch: {}
 jobs:
   build:
     runs-on: ubuntu-latest
