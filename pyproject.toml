@@ -9,6 +9,11 @@ authors = [
     {name="Christopher Prince", email="c.pj.prince@gmail.com"}
     ]
 description = "Python Module for QI Content and Collections Management System by Keepthinking"
+readme = "README.md"
+license = "Apache-2.0"
+license-files = ["LICEN[CS]E*"]
+keywords = ["archiving","archives","digital archiving","CMS","QI","Keepthinking"]
+
 classifiers = [
     "Programming Language :: Python :: 3",
     "License :: OSI Approved :: Apache Software License",
