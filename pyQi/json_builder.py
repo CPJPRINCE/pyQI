@@ -6,6 +6,7 @@ license: Apache License 2.0"
 """
 
 import logging
+import pandas as pd
 
 logger = logging.getLogger(__name__)
 
@@ -22,16 +23,22 @@ class JsonBuilder():
         
     def parse_data_init(self):
         self.record_info_dict = dict()
-        self.relations_set = set()       
-        self.lists_set = set() 
+        self.relations_set = set()
+        self.lists_set = set()
         for record in self.data:
+            if self.data.get(record) == "" or self.data.get(record) == "nan" or pd.isnull(self.data.get(record)) or pd.isna(self.data.get(record)):
+                self.record_info_dict.update({record:None})
+                continue
             if "list:" in record:
                 self.lists_set.add(record.split(":")[1])
-            if "relationship:" in record:
+            elif "relationship:" in record:
                 self.relations_set.add(record.split(":")[1])
-            else: self.record_info_dict.update({record:self.data.get(record)})
+            else:
+                self.record_info_dict.update({record:self.data.get(record)})
         self.relations_set = sorted(self.relations_set)
         logger.debug(f"Lists: {self.lists_set}")
+        logger.debug(f"Relationships Init: {self.relations_set}")
+        logger.debug(f"Record Info: {self.record_info_dict}")
     
     def parse_data_relationships(self):
         relations_dict = {}        
