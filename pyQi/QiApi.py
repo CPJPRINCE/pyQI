@@ -202,7 +202,7 @@ class QiAPI(QiAuthentication):
             url = "/".join([self.root_url, method, table, "_approve/yes"])
         else:
             url = "/".join([self.root_url, method, table])
-        self._call_url_iter(url, method=method, data=data)
+        self._call_url(url, method=method, data=data)
 
     def post_request(self, data: str|dict, table: str, auto_approve: bool = False, print_response: bool = False):
         self.print_response = print_response
@@ -367,7 +367,7 @@ class QiAPI(QiAuthentication):
         elif path.endswith(('ods', 'odt', 'ots')):
             self.df = pd.read_excel(path, engine='odf')
         elif path.endswith('xml'):
-            self.df = pd.read_xml(path) 
+            self.df = pd.read_xml(path)
         
     def import_from_file(self, file: str, table: str, auto_approve: bool = False, print_response: bool = False):
         self._read_source(file)
@@ -394,10 +394,11 @@ class QiAPI(QiAuthentication):
         records = self.df.to_dict('records')
         for row in records:
             record_dict = JsonBuilder(row).records_dict
+            # This seems overcomplicated? Why not use lookup_field as get?
             id = record_dict['record'].get('id')
             if id is None:
                 if lookup_field is not None:
-                    lookup_term = record_dict.get(lookup_field, None)
+                    lookup_term = record_dict['record'].get(lookup_field, None)
                     if lookup_term is None:
                         log_msg = f"Lookup field '{lookup_field}' not found in record. Cannot perform lookup. Ending Program."
                         logger.error(log_msg)
@@ -410,6 +411,7 @@ class QiAPI(QiAuthentication):
                     logger.error(log_msg)
                     raise ValueError(log_msg)
             record_dict.update({'id':id,'node_id': node_id})
+            #record_dict['record'].pop('id',None)
             record_dict['record'].update({'id': id})
             self.put_request(data = record_dict, table = table, auto_approve = auto_approve, print_response = print_response)
 
